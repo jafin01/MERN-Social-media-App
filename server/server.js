@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import connectToDB from './config/db.js';
 import 'colors';
 import router from './routes/userRoutes.js';
+import errorHandler from './middlewares/errorMiddleware.js';
 
 const app = express();
 dotenv.config();
@@ -30,4 +31,7 @@ connectToDB(() => {
 });
 
 // Routes
-app.use('/api', router);
+app.use('/api/user', router);
+
+// Error middleware
+app.use(errorHandler);

@@ -16,10 +16,16 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
     required: true,
+  },
+  blockStatus: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
   picturePath: {
     type: String,
