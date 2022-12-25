@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import connectToDB from './config/db.js';
 import 'colors';
+import router from './routes/userRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -29,3 +30,4 @@ connectToDB(() => {
 });
 
 // Routes
+app.use('/api', router);
