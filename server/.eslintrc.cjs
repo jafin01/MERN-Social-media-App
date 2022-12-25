@@ -10,6 +10,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
     quotes: ['error', 'single'],
     // we want to force semicolons
     semi: ['error', 'always'],
@@ -17,5 +18,12 @@ module.exports = {
     indent: ['error', 2],
     // we want to avoid extraneous spaces
     'no-multi-spaces': ['error'],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'always',
+      },
+    ],
   },
 };
