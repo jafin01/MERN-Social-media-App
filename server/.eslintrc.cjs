@@ -17,5 +17,12 @@ module.exports = {
     indent: ['error', 2],
     // we want to avoid extraneous spaces
     'no-multi-spaces': ['error'],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'always',
+      },
+    ],
   },
 };
