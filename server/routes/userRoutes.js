@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/:id', userAuth, getUser);
 router.get('/:id/friends', userAuth, getUserFriends);
-router.post('/:id/:friendId', userAuth, addOrRemoveFriend);
+router.post('/:userId/:friendId', userAuth, addOrRemoveFriend);
 
 export default router;

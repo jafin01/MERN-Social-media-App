@@ -7,7 +7,11 @@ import connectToDB from './config/db.js';
 import 'colors';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import postRoutes from './routes/postRoutes.js';
 import errorHandler from './middlewares/errorMiddleware.js';
+// import User from './model/userModel.js';
+// import Post from './model/postModel.js';
+// import { posts, users } from './data/data.js';
 
 const app = express();
 dotenv.config();
@@ -26,6 +30,9 @@ const PORT = process.env.PORT || 8000;
 // Connecting to DB
 connectToDB(() => {
   app.listen(PORT, () => {
+    // add dummy data only once
+    // User.insertMany(users);
+    // Post.insertMany(posts);
     // eslint-disable-next-line no-console
     console.log(`Listening to Port ${process.env.PORT}`);
   });
@@ -34,6 +41,7 @@ connectToDB(() => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 // Error middleware
 app.use(errorHandler);

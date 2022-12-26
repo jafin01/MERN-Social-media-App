@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema(
     },
     friends: {
       type: Array,
-      required: false,
+      required: true,
+      default: [],
     },
     email: {
       type: String,

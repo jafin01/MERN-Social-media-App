@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import User from '../model/userModel.js';
-import { findUserByEmail, getfriends, getUserById } from '../helpers/userHelpers.js';
+import { findUserByEmail, getFriends, getUserById } from '../helpers/userHelpers.js';
 
 // create jwt token
 const createToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -103,7 +103,7 @@ export const getUserFriends = asyncHandler(async (req, res) => {
     const user = await getUserById(req.params.id);
 
     // get friends from user
-    const friends = await getfriends(user);
+    const friends = await getFriends(user);
     const formattedFriends = friends.map(
       ({
         _id, firstName, lastName, occupation, location, picturePath,
@@ -129,25 +129,13 @@ export const addOrRemoveFriend = asyncHandler(async (req, res) => {
   const { userId, friendId } = req.params;
 
   try {
-    // verify userId
-    if (!mongoose.isValidObjectId(userId)) {
-      res.status(400);
-      throw new Error('userId is not Valid');
-    }
-
-    // verify friendId
-    if (!mongoose.isValidObjectId(friendId)) {
-      res.status(400);
-      throw new Error('friendId is not valid');
-    }
-
     // get user and friend from id
     const user = await getUserById(userId);
     const friend = await getUserById(friendId);
 
     if (user.friends.includes(friendId)) {
-      user.friends.remove(friendId);
-      friend.friends.remove(userId);
+      user.friends = user.friends.filter((id) => id !== friendId);
+      friend.friends = friend.friends.filter((id) => id !== userId);
     } else {
       user.friends.push(friendId);
       friend.friends.push(userId);
@@ -157,7 +145,7 @@ export const addOrRemoveFriend = asyncHandler(async (req, res) => {
     await friend.save();
 
     // get updated friends list
-    const updatedFriends = await getUserFriends(user);
+    const updatedFriends = await getFriends(user);
     const formattedFriends = updatedFriends.map(
       ({
         _id, firstName, lastName, picturePath, occupation, location,
