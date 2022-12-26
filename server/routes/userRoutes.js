@@ -1,12 +1,9 @@
 import express from 'express';
-import upload from '../middlewares/multerMiddleware.js';
+import { getUser } from '../controllers/userController.js';
 import userAuth from '../middlewares/authMiddleware.js';
-import { userLogin, userRegistration } from '../controllers/userController.js';
 
 const router = express.Router();
 
-router.post('/register', upload.single('picture'), userRegistration);
-
-router.post('/login', userAuth, userLogin);
+router.get('/:id', userAuth, getUser);
 
 export default router;

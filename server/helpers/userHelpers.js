@@ -2,7 +2,7 @@
 import User from '../model/userModel.js';
 
 // find user with email
-const findUserByEmail = (email) => new Promise(async (resolve, reject) => {
+export const findUserByEmail = (email) => new Promise(async (resolve, reject) => {
   try {
     const user = User.findOne({ email });
     resolve(user);
@@ -11,4 +11,12 @@ const findUserByEmail = (email) => new Promise(async (resolve, reject) => {
   }
 });
 
-export default findUserByEmail;
+// get user with id
+export const getUserById = (id) => new Promise(async (resolve, reject) => {
+  try {
+    const user = await User.findById(id);
+    resolve(user);
+  } catch (error) {
+    reject(error);
+  }
+});

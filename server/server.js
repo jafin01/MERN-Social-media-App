@@ -5,7 +5,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import connectToDB from './config/db.js';
 import 'colors';
-import router from './routes/userRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import errorHandler from './middlewares/errorMiddleware.js';
 
 const app = express();
@@ -31,7 +32,8 @@ connectToDB(() => {
 });
 
 // Routes
-app.use('/api/user', router);
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 
 // Error middleware
 app.use(errorHandler);

@@ -1,8 +1,9 @@
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 import User from '../model/userModel.js';
-import findUserByEmail from '../helpers/userHelpers.js';
+import findUserByEmail, { getUserById } from '../helpers/userHelpers.js';
 
 // create jwt token
 const createToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -35,7 +36,7 @@ export const userRegistration = asyncHandler(async (req, res) => {
 
     await user.save();
 
-    res.status(200).json(user);
+    res.status(201).json(user);
   } catch (error) {
     throw new Error(error.message);
   }
@@ -73,3 +74,25 @@ export const userLogin = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 });
+
+// @desc get the user
+// @route GET /api/users/:id
+// @access Private
+export const getUser = asyncHandler(async (req, res) => {
+  try {
+    // check if id is valid
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400);
+      throw new Error('Invalid objectId');
+    }
+
+    // get user by id
+    const user = await getUserById(req.params.id);
+    res.status(200).json(user);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
+
+// @desc get user friends
+// @route GET /api/users/:id/friends
