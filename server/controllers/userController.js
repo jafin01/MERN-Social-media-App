@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import User from '../model/userModel.js';
-import findUserByEmail, { getUserById } from '../helpers/userHelpers.js';
+import { findUserByEmail, getfriends, getUserById } from '../helpers/userHelpers.js';
 
 // create jwt token
 const createToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -96,3 +96,28 @@ export const getUser = asyncHandler(async (req, res) => {
 
 // @desc get user friends
 // @route GET /api/users/:id/friends
+// @access Private
+export const getUserFriends = asyncHandler(async (req, res) => {
+  try {
+    // get the user with id
+    const user = await getUserById(req.params.id);
+
+    // get friends from user
+    const friends = await getfriends(user);
+    const formattedFriends = friends.map(
+      ({
+        _id, firstName, lastName, occupation, location, picturePath,
+      }) => ({
+        _id,
+        firstName,
+        lastName,
+        occupation,
+        location,
+        picturePath,
+      }),
+    );
+    res.status(200).json(formattedFriends);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
