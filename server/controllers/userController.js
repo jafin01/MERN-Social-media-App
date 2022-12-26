@@ -93,3 +93,6 @@ export const getUser = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 });
+
+// @desc get user friends
+// @route GET /api/users/:id/friends
