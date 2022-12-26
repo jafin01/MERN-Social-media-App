@@ -22,7 +22,7 @@ export const getUserById = (id) => new Promise(async (resolve, reject) => {
 });
 
 // get user friends from user
-export const getfriends = (user) => new Promise(async (resolve, reject) => {
+export const getFriends = (user) => new Promise(async (resolve, reject) => {
   try {
     const friends = await Promise.all(user.friends.map((id) => User.findById(id)));
     resolve(friends);
