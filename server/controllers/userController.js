@@ -35,7 +35,7 @@ export const userRegistration = asyncHandler(async (req, res) => {
 
     await user.save();
 
-    res.status(200).json(user);
+    res.status(201).json(user);
   } catch (error) {
     throw new Error(error.message);
   }
