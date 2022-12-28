@@ -1,8 +1,12 @@
+import { Box } from '@mui/system';
 import React from 'react';
+import Navbar from '../Navbar/Navbar';
 
 function HomePage() {
   return (
-    <div>Homepage</div>
+    <Box>
+      <Navbar />
+    </Box>
   );
 }
 
