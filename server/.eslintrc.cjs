@@ -10,6 +10,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'linebreak-style': ['error', 'windows'],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     quotes: ['error', 'single'],
     // we want to force semicolons
