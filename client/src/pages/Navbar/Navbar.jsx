@@ -21,8 +21,7 @@ import {
   Menu,
   Close,
 } from '@mui/icons-material';
-import { useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FlexBetween from '../../components/FlexBetween';
 import { authActions } from '../../store/authSlice';
@@ -31,7 +30,7 @@ function Navbar() {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px');
 
   const theme = useTheme();
@@ -41,8 +40,7 @@ function Navbar() {
   const primaryLight = theme.palette.primary.light;
   const { alt } = theme.palette.background;
 
-  // const fullName = `${user.firstName} ${user.lastName}`;
-  const fullName = 'Jafin Jahfar';
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <FlexBetween padding="1rem 6%" background={alt}>
