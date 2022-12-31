@@ -58,7 +58,7 @@ function Form() {
     for (const value in values) {
       formData.append(value, values[value]);
     }
-    formData.append('picturePath', values.picture.name);
+    formData.append('picture', values.picture.name);
 
     const savedUserResponse = await fetch('http://localhost:6001/api/auth/register', {
       method: 'POST',
@@ -66,6 +66,7 @@ function Form() {
     });
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
+    console.log(savedUser);
 
     if (savedUser) {
       setPageType('login');
