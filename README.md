@@ -1,4 +1,4 @@
-# Campertrek E commerce-Website
+# Sociopedia - A Social media web application
 
 ## Table of contents
 
@@ -20,9 +20,7 @@ NOTE: Please read the RUN section before opening an issue.
 This is a Social media web application where users can post their pictures, view other people profiles, like post, add/remove friend. 
 
 
-![This is an image](/Campertrek.png)
-![This is an image](/ecommerce-1.png)
-![This is an image](/ecommerce.png)
+![This is an image](/sociopedia.png)
 ## Run
 
 To run this application, you have to set your own environmental variables. For security reasons, some variables have been hidden from view and used as environmental variables with the help of dotenv package. Below are the variables that you need to set in order to run the application:
